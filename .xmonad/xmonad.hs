@@ -90,7 +90,10 @@ myDzenGenOpts = "-fg '" ++ myFgColor ++ "' -bg '" ++ myBgColor ++ "' -fn '" ++ m
 myStatusBar = "dzen2 -w 600 -ta l " ++ myDzenGenOpts
 
 -- Conky Bar
-myConkyRightBar = "conky -c /home/grender/.minimalDesktop/conky.conf | dzen2 -x 400 -w 832 -ta r " ++ myDzenGenOpts
+myConkyRightBar = "conky -c /home/grender/.minimalDesktop/conky.conf | dzen2 -x 400 -w 800 -ta r " ++ myDzenGenOpts
+
+-- 1200
+-- 1280
 
 myImLayout=(combineTwoP (TwoPane inc 0.2) rostersLayout simpleTabbed  roster) ||| Full
     where 
@@ -103,7 +106,8 @@ myImLayout=(combineTwoP (TwoPane inc 0.2) rostersLayout simpleTabbed  roster) ||
 -- Layouts
 myLayoutHook = avoidStruts $ smartBorders 
 	    $ onWorkspace "im" myImLayout
-	    $ (tiled ||| Mirror tiled ||| Full)
+--	    $ (tiled ||| Mirror tiled ||| Full)
+	    $ (tiled ||| Full)
   where
     tiled = ResizableTall nmaster delta ratio []
     nmaster = 1
@@ -177,6 +181,13 @@ newKeys conf@(XConfig {XMonad.modMask = modm}) = [
    , ((modm,               xK_Left),    prevWS)
    , ((modm .|. shiftMask, xK_Right),  shiftToNext)
    , ((modm .|. shiftMask, xK_Left),    shiftToPrev)
+   
+    -- XF86AudioMute
+    , ((0 , 0x1008ff12), spawn "amixer -q set Master toggle")
+    -- XF86AudioLowerVolume
+    , ((0 , 0x1008ff11), spawn "amixer -q set Master 2- unmute")
+    -- XF86AudioRaiseVolume
+    , ((0 , 0x1008ff13), spawn "amixer -q set Master 2+ unmute")   
    ]
 
 -- Dzen config
