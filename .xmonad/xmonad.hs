@@ -129,7 +129,7 @@ myLayoutHook = avoidStruts $ smartBorders
 --   where
 --      wrapBitmap bitmap = "^p(5)^i(" ++ myBitmapsPath ++ bitmap ++ ")^p(5)"
 
-myWorkspaces    = ["web","2","im","4","5","6","7","8","9"]
+myWorkspaces    = ["web","dev","3","4","5","6","7","8","im"]
 
 -- Urgency hint configuration
 myUrgencyHook = withUrgencyHook dzenUrgencyHook
