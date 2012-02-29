@@ -106,8 +106,8 @@ myImLayout=(combineTwoP (TwoPane inc 0.2) rostersLayout simpleTabbed  roster) ||
 -- Layouts
 myLayoutHook = avoidStruts $ smartBorders 
 	    $ onWorkspace "im" myImLayout
---	    $ (tiled ||| Mirror tiled ||| Full)
-	    $ (tiled ||| Full)
+	    $ (tiled ||| Mirror tiled ||| Full)
+--	    $ (tiled ||| Full)
   where
     tiled = ResizableTall nmaster delta ratio []
     nmaster = 1
