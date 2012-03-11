@@ -15,6 +15,7 @@ import XMonad.Layout.ResizableTile
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.IM
 import XMonad.Layout.Grid
+import XMonad.Layout.Reflect
 import Data.Ratio ((%))
 
 import XMonad.Layout.Roledex
@@ -103,8 +104,12 @@ myImLayout=(combineTwoP (TwoPane inc 0.2) rostersLayout simpleTabbed  roster) ||
 	trillianRoster= (Title "Trillian")
         inc=0.05
 
+myGimpLayout=withIM (0.11) (Role "gimp-toolbox") $
+             reflectHoriz $
+             withIM (0.15) (Role "gimp-dock") Full
 -- Layouts
-myLayoutHook = avoidStruts $ smartBorders 
+myLayoutHook = avoidStruts $ smartBorders
+            $ onWorkspace "gimp" myGimpLayout
 	    $ onWorkspace "im" myImLayout
 	    $ (tiled ||| Mirror tiled ||| Full)
 --	    $ (tiled ||| Full)
@@ -129,7 +134,7 @@ myLayoutHook = avoidStruts $ smartBorders
 --   where
 --      wrapBitmap bitmap = "^p(5)^i(" ++ myBitmapsPath ++ bitmap ++ ")^p(5)"
 
-myWorkspaces    = ["web","dev","3","4","5","6","7","8","im"]
+myWorkspaces    = ["web","dev","3","4","5","6","7","gimp","im"]
 
 -- Urgency hint configuration
 myUrgencyHook = withUrgencyHook dzenUrgencyHook
@@ -145,7 +150,7 @@ myUrgencyHook = withUrgencyHook dzenUrgencyHook
 myManageHook = composeAll
              [ className =? "MPlayer"          --> doFloat
              , className =? "Vlc"              --> doFloat
-             , className =? "Gimp"             --> doFloat
+--           , className =? "Gimp"             --> doFloat
              , resource  =? "desktop_window"   --> doIgnore
              , resource  =? "kdesktop"         --> doIgnore 
              , className =? "Chromium-browser" --> moveTo "web"
@@ -181,7 +186,7 @@ newKeys conf@(XConfig {XMonad.modMask = modm}) = [
    , ((modm,               xK_Left),    prevWS)
    , ((modm .|. shiftMask, xK_Right),  shiftToNext)
    , ((modm .|. shiftMask, xK_Left),    shiftToPrev)
-   
+   , ((modm .|. shiftMask, xK_t) , sendMessage ToggleStruts)
     -- XF86AudioMute
     , ((0 , 0x1008ff12), spawn "amixer -q set Master toggle")
     -- XF86AudioLowerVolume
