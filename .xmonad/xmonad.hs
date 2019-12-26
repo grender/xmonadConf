@@ -88,10 +88,10 @@ myUrgencyHintBgColor = "brown"
 myDzenGenOpts = "-fg '" ++ myFgColor ++ "' -bg '" ++ myBgColor ++ "' -fn '" ++ myFont ++ "' -h '16'"
 
 -- Status Bar
-myStatusBar = "dzen2 -w 800 -ta l " ++ myDzenGenOpts
+myStatusBar = "dzen2 -w 400 -ta l " ++ myDzenGenOpts
 
 -- Conky Bar
-myConkyRightBar = "conky -c /home/grender/.minimalDesktop/conky.conf | dzen2 -x 800 -w 1040 -ta r " ++ myDzenGenOpts
+myConkyRightBar = "conky -c /home/grender/.minimalDesktop/conky.conf | dzen2 -x 400 -w 800 -ta r " ++ myDzenGenOpts
 
 -- 1200
 -- 1280
